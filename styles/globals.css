@@ -158,12 +158,12 @@
 }
 .copyrightContainer{
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   justify-content: flex-end;
 }
 .copyright{
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   justify-content: flex-end;
 }
 @media screen and (max-width: 768px) {
