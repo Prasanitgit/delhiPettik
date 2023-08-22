@@ -1,0 +1,34 @@
+.navbar {
+    padding: 0 65px;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #ffff;
+    z-index: 20;
+  }
+.logo img{
+  width: 120px ;
+  height:75px;
+}
+.callNowContainer{
+    display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.callNow{
+    padding: 10px 20px;
+    font-size: 15px;
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .callNowContainer{
+    display: none;
+  }
+}

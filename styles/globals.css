@@ -1,26 +1,173 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
-* {
-  box-sizing: border-box;
+.whatsapp{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 9;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.call{
+  position: fixed;
+ left: 30px;
+  bottom: 30px;
+  z-index: 9;
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .call{
+    display: block;
   }
-  body {
-    color: white;
-    background: black;
+}
+
+.radial-gradient {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #e9ffab 0%,
+    rgba(233, 255, 171, 0) 100%
+  );
+}
+
+.slide-container{
+  max-width: 1120px;
+  width: 100%;
+}
+.slide-content{
+ padding: 40px !important;
+  overflow: hidden;
+  border-radius: 25px;
+}
+.card{
+  border-radius: 25px;
+  background-color: #FFF;
+}
+.image-content,
+.card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+.image-content{
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #FF9934;
+  border-radius: 25px 25px 0 25px;
+}
+.overlay::before,
+.overlay::after{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: #FF9934;
+}
+.overlay::after{
+  border-radius: 0 25px 0 0;
+  background-color: #FFF;
+}
+.card-image{
+  position: relative;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background: #FFF;
+  padding: 3px;
+}
+.card-image .card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #FF9934;
+}
+.name{
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+}
+.description{
+  font-size: 14px;
+  color: #707070;
+  text-align: center;
+}
+.swiper-pagination-bullet-active {
+  background: #FF9934 !important;
+}
+.swiper-navBtn{
+  color: #FF9934;
+  transition: color 0.3s ease;
+}
+.swiper-navBtn:hover{
+  color: #FF9934;
+}
+.swiper-button-next, .swiper-rtl .swiper-button-prev {
+  color: #FF9934 !important;
+}
+.swiper-button-prev{
+  color: #FF9934 !important;
+}
+.swiper-button-prev.swiper-button-disabled, .swiper-button-next.swiper-button-disabled {
+  opacity: 0.35;
+  color: #FF9934 !important;
+}
+.swiper-navBtn::before,
+.swiper-navBtn::after{
+  font-size: 35px;
+}
+.swiper-button-next{
+  right: 0;
+}
+.swiper-button-prev{
+  left: 0;
+}
+.swiper-pagination-bullet{
+  background-color: #6E93f7;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active{
+  background-color: #4070F4;
+}
+@media screen and (max-width: 768px) {
+.swiper-button-next,.swiper-button-prev,.swiper-button-disabled {
+    display: none !important;
   }
+  .slide-content{
+    margin: 0 10px;
+  }
+  .swiper-navBtn{
+    display: none;
+  }
+}
+.footerLine{
+  border: 1px solid #0E236E;
+ 
+  opacity: 28%;
+}
+@media screen and (max-width: 768px) {
+  .footerLogo{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+}
+.groomingprice{
+  flex-direction: column;
+    text-align: left;
+}
+.actualgroomingprice{
+  text-decoration: line-through;
+  color: red;
 }
