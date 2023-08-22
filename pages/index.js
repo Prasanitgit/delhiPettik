@@ -239,21 +239,16 @@ const[token,setToken]=useState("");
         </div>
       </Carousel>
       <Container className="pt-10 pb-10">
-        <Box sx={{ width: "100%" }}>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            <Grid item xs={12} sm={12} md={6}>
-              <div className="text-2xl font-medium mt-3 mb-2">
+          <div className="pb-24 md:px-24 flex flex-col md:flex-row gap-y-14 gap-x-14 justify-center items-center">
+           <div>
+            <div className="text-2xl font-medium mt-3 mb-2">
                 <span className="text-orange">Book</span> an appointment{" "}
                 <PetsIcon className="text-orange" />
               </div>
               <Box
                 component="form"
                 sx={{
-                  "& > :not(style)": { m: 1, width: "40ch" },
+                  "& > :not(style)": { m: 1, width: "100%" },
                 }}
                 noValidate
                 autoComplete="off"
@@ -316,22 +311,15 @@ const[token,setToken]=useState("");
               <button className="m-2 rounded-lg py-2 px-3 bg-orange shadow-none hover:shadow-none text-white" onClick={()=>submit(formData)}>
                 Book Now <SendIcon />
               </button>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={12}
-              md={6}
-              className="flex items-center justify-center"
-            >
-              <img
+           </div>
+           
+            <img
                 src="/BookAppointmentImage.png"
-                className="w-[60%] md:w-[60%] sm:w-[40%]"
+                className="w-[50%] md:w-[40%] sm:w-[50%]"
                 alt="inquiry image"
               />
-            </Grid>
-          </Grid>
-        </Box>
+           
+         </div>
       </Container>
       <div className="pb-24 md:px-24 flex flex-col gap-y-14 justify-center items-center">
         <div className="text-3xl font-semi-bold">

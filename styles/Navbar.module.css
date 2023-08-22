@@ -4,6 +4,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -30,5 +31,8 @@
 @media screen and (max-width: 768px) {
   .callNowContainer{
     display: none;
+  }
+  .navbar {
+   justify-content: center;
   }
 }
