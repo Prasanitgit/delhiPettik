@@ -121,7 +121,7 @@ const Footer = () => {
             xs={12}
             sm={12}
             md={8}
-            className="flex flex-col md:flex-col justify-end"
+            className="copyrightContainer"
           >
           <div  className="copyright">
           <hr className="footerLine w-[100%]"></hr>

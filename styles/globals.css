@@ -156,6 +156,11 @@
  
   opacity: 28%;
 }
+.copyrightContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 .copyright{
   display: flex;
   flex-direction: column;
