@@ -124,7 +124,7 @@ const Footer = () => {
             className="copyright"
           >
             <hr className="footerLine w-[100%]"></hr>
-            <div className="pt-2">
+            <div className="pt-2 flex justify-center text-center">
               COPYRIGHT &copy;2023. All Rights Reserved by &nbsp;
               <span className="text-orange">Pettik</span>
             </div>
