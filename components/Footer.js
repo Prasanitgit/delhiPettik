@@ -121,13 +121,15 @@ const Footer = () => {
             xs={12}
             sm={12}
             md={8}
-            className="copyright"
+            className="flex flex-col justify-end"
           >
-            <hr className="footerLine w-[100%]"></hr>
-            <div className="pt-2 flex justify-center text-center">
-              COPYRIGHT &copy;2023. All Rights Reserved by &nbsp;
-              <span className="text-orange">Pettik</span>
-            </div>
+          <div  className="copyright">
+          <hr className="footerLine w-[100%]"></hr>
+          <div className="pt-2 flex justify-center text-center text-sm">
+            COPYRIGHT &copy;2023. All Rights Reserved by &nbsp;
+            <span className="text-orange">Pettik</span>
+          </div></div>
+           
           </Grid>
         </Grid>
       </Stack>
