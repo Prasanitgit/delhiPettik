@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import Navbar from "../components/Navbar";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -61,74 +62,65 @@ const serviceData = [
 
 export default function Home() {
   const baseUrl = "https://xmxpaqn8ad.execute-api.us-east-1.amazonaws.com";
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTE5Mjc2ODYsImRhdGEiOnsidWlkIjoiSkhCQklBRkZKSSJ9LCJpYXQiOjE2OTE4NDEyODZ9.jpcEaDwr0q4SafOllKMCn-V0HWCUq9kVKKGfFhJxujY"
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [expanded, setExpanded] = useState(false);
-const[token,setToken]=useState("");
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
   const [formData, setFormData] = useState({
     name: "",
-    phone:"",
-    location:"",
+    phone: "",
+    location: "",
     service: "",
   });
   const [groomingData, setGroomingData] = useState([]);
 
   useEffect(() => {
-    const auth = async () => {
-      try {
-        const res = await axios.post(
-          `${baseUrl}/auth/login`,{
-            "email":"somnath@pettik.com",
-            "password":"somnath123"
-        }
-        );
-        console.log("token",res.data.token);
-        setToken(res.data.token);
-      } catch (e) {
-        enqueueSnackbar("Server error ", { variant: "error" });
-        console.log(e);
-      }
-    };
-    auth();
+   
     const apiCall = async () => {
-      const res = await axios.get(
-        `${baseUrl}/services/grooming/201002`,
-        {
+      try {
+        const res = await axios.get(`${baseUrl}/services/grooming/201002`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      console.log("res", res.data.services);
-      setGroomingData(res.data.services);
+        });
+        console.log("res", res.data.services);
+        setGroomingData(res.data.services);
+      } catch (e) {
+        enqueueSnackbar("Backend server error... ", { variant: "error" });
+      }
     };
-    token?apiCall(): enqueueSnackbar("Server error ", { variant: "error" });
+
+    apiCall();
   }, []);
   const handelInput = (e) => {
     const [key, value] = [e.target.name, e.target.value];
     setFormData((prevValue) => ({ ...prevValue, [key]: value }));
   };
 
-  const submit = async(data)=>{
-    console.log("input",baseUrl)
-    if (!validateInput(data))
-    return;
- await axios.post(`${baseUrl}/add/enquiry`,
- {
-  "name": data.name,
-  "phone_number": data.phone,
-  "location": data.location,
-  "service": data.service
-},
- {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
-  }
-  const validateInput = (data)=>{
+  const submit = async (data) => {
+    console.log("input", baseUrl);
+    if (!validateInput(data)) return;
+    await axios.post(
+      `${baseUrl}/add/enquiry`,
+      {
+        name: data.name,
+        phone_number: data.phone,
+        location: data.location,
+        service: data.service,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    enqueueSnackbar("Submited successfully ", { variant: "success" });
+    router.push("/thankyou");
+  };
+  const validateInput = (data) => {
     if (!data.name) {
       enqueueSnackbar("User name is a required field", { variant: "error" });
       return false;
@@ -137,8 +129,10 @@ const[token,setToken]=useState("");
       enqueueSnackbar("Phone number is a required field", { variant: "error" });
       return false;
     }
-    if (data.phone.length<10||data.phone.length>10) {
-      enqueueSnackbar("Please enter a valid phone number", { variant: "error" });
+    if (data.phone.length < 10 || data.phone.length > 10) {
+      enqueueSnackbar("Please enter a valid phone number", {
+        variant: "error",
+      });
       return false;
     }
     if (!data.location) {
@@ -154,7 +148,7 @@ const[token,setToken]=useState("");
       return false;
     }
     return true;
-  }
+  };
 
   const RatingAndButtons = ({
     platformName1,
@@ -223,103 +217,100 @@ const[token,setToken]=useState("");
       </div>
       <Carousel showThumbs={false} infiniteLoop={true} interval={2000} autoPlay>
         <div>
-          <img src="/Banner.png" />
+          <img src="/boarding_banner.png" />
         </div>
         <div>
-          <img src="/Vaccination banner.png" />
+          <img src="/boarding_banner.png" />
         </div>
         <div>
-          <img src="/Banner2.png" />
+          <img src="/boarding_banner.png" />
         </div>
         <div>
-          <img src="/Banner3.png" />
+          <img src="/boarding_banner.png" />
         </div>
         <div>
-          <img src="/Banner4.png" />
+          <img src="/boarding_banner.png" />
         </div>
       </Carousel>
       <Container className="pt-10 pb-10">
-          <div className="pb-24 md:px-24 flex flex-col md:flex-row gap-y-14 gap-x-14 justify-center items-center">
-           <div>
+        <div className="pb-24 md:px-24 flex flex-col md:flex-row gap-y-14 gap-x-14 justify-center items-center">
+          <div>
             <div className="text-2xl font-medium mt-3 mb-2">
-                <span className="text-orange">Book</span> an appointment{" "}
-                <PetsIcon className="text-orange" />
-              </div>
-              <Box
-                component="form"
-                sx={{
-                  "& > :not(style)": { m: 1, width: "100%" },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                  name="name"
-                  value={formData.name}
-                  onChange={handelInput}
-                />
-                <TextField
-                  id="outlined-basic"
-                  label="Phone number"
-                  variant="outlined"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handelInput}
-                />
-                <FormControl fullWidth>
-                  <InputLabel id="locationId">
-                   Location
-                  </InputLabel>
-                  <Select
-                    labelId="locationId"
-                    id="demo-location"
-                    value={formData.location}
-                    label="Location"
-                    onChange={handelInput}
-                    name="location"
-                  >
-                    <MenuItem value="delhi">Delhi</MenuItem>
-                    <MenuItem value="bangalore">Bangalore</MenuItem>
-                    
-                  </Select>
-                </FormControl>
-                
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Services
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={formData.service}
-                    label="Services"
-                    onChange={handelInput}
-                    name="service"
-                  >
-                    <MenuItem value="grooming">Grooming</MenuItem>
-                    <MenuItem value="vaccine">Vaccine</MenuItem>
-                    <MenuItem value="walking">Walking</MenuItem>
-                    <MenuItem value="training">Training</MenuItem>
-                    <MenuItem value="boarding">Boarding</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-
-              <button className="m-2 rounded-lg py-2 px-3 bg-orange shadow-none hover:shadow-none text-white" onClick={()=>submit(formData)}>
-                Book Now <SendIcon />
-              </button>
-           </div>
-           
-            <img
-                src="/BookAppointmentImage.png"
-                className="w-[50%] md:w-[40%] sm:w-[50%]"
-                alt="inquiry image"
+              <span className="text-orange">Book</span> an appointment{" "}
+              <PetsIcon className="text-orange" />
+            </div>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, width: "100%" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                id="outlined-basic"
+                label="Name"
+                variant="outlined"
+                name="name"
+                value={formData.name}
+                onChange={handelInput}
               />
-           
-         </div>
+              <TextField
+                id="outlined-basic"
+                label="Phone number"
+                variant="outlined"
+                name="phone"
+                value={formData.phone}
+                onChange={handelInput}
+              />
+              <FormControl fullWidth>
+                <InputLabel id="locationId">Location</InputLabel>
+                <Select
+                  labelId="locationId"
+                  id="demo-location"
+                  value={formData.location}
+                  label="Location"
+                  onChange={handelInput}
+                  name="location"
+                >
+                  <MenuItem value="delhi">Delhi</MenuItem>
+                  <MenuItem value="bangalore">Bangalore</MenuItem>
+                </Select>
+              </FormControl>
+
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Services</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={formData.service}
+                  label="Services"
+                  onChange={handelInput}
+                  name="service"
+                >
+                  <MenuItem value="grooming">Grooming</MenuItem>
+                  <MenuItem value="vaccine">Vaccine</MenuItem>
+                  <MenuItem value="walking">Walking</MenuItem>
+                  <MenuItem value="training">Training</MenuItem>
+                  <MenuItem value="boarding">Boarding</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+
+            <button
+              className="m-2 rounded-lg py-2 px-3 bg-orange shadow-none hover:shadow-none text-white"
+              onClick={() => submit(formData)}
+            >
+              Book Now <SendIcon />
+            </button>
+          </div>
+
+          <img
+            src="/BookAppointmentImage.png"
+            className="w-[70%] md:w-[40%] sm:w-[50%]"
+            alt="inquiry image"
+          />
+        </div>
       </Container>
       <div className="pb-24 md:px-24 flex flex-col gap-y-14 justify-center items-center">
         <div className="text-3xl font-semi-bold">
@@ -344,12 +335,15 @@ const[token,setToken]=useState("");
       </div>
 
       <div className="flex flex-col items-center justify-center px-10 gap-y-6 text-center py-6 mb-12 md:mb-14">
-      <div className="text-3xl font-semi-bold">
-      Explore Our Pet <span className="text-orange">Grooming Packages</span>
-    </div>
-      <div className="w-full md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-x-12 items-center justify-center">
+        <div className="text-3xl font-semi-bold">
+          Explore Our Pet <span className="text-orange">Grooming Packages</span>
+        </div>
+        <div className="w-full md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-x-12 items-center justify-center">
           {groomingData?.map((val, index) => (
-            <div className="flex flex-col items-center p-6 rounded-xl bg-package h-full shadow-xl justify-between" key={index}>
+            <div
+              className="flex flex-col items-center p-6 rounded-xl bg-package h-full shadow-xl justify-between"
+              key={index}
+            >
               <div className="w-full flex flex-col items-center">
                 <div className="text-xl md:text-2xl font-nunito-black pb-4 text-center">
                   {val.name}
@@ -382,22 +376,25 @@ const[token,setToken]=useState("");
           ))}
         </div>
       </div>
-      <div className="flex flex-col px-6 gap-y-5 md:justify-center md:items-center md:gap-x-14 md:px-24 md:py-10">
-        
-      <div className="flex flex-col items-center justify-center">
-      <img src="HappyPet.png" alt="happy pets" className="w-[50%] md:w-[50%] sm:w-[30%]"/>
+      <div className="flex flex-col px-6 gap-y-5 py-10 md:justify-center md:items-center md:gap-x-14 md:px-24 md:py-10">
+        <div className="flex flex-col items-center justify-center">
+          <img
+            src="HappyPet.png"
+            alt="happy pets"
+            className="w-[50%] md:w-[50%] sm:w-[30%]"
+          />
           <div className="flex text-3xl font-semi-bold mt-5 mb-3 items-center justify-center text-center">
-          Give your Pets pampering they deserve
+            Give your Pets pampering they deserve
           </div>
         </div>
 
         <div className="flex items-center justify-center">
-          <Iframe
+         <Iframe
             url="https://www.youtube.com/embed/fXRYJnlDvLg"
-            width="1040px"
-            height="453px"
+            width=""
+            height="450px"
             id=""
-            className=""
+            className="w-[80%] md:w-[80%]"
             display="block"
             position="relative"
           />
@@ -440,7 +437,7 @@ const[token,setToken]=useState("");
               <span className="overlay"></span>
 
               <div className="card-image">
-                <img src="/Expert icon.png" alt="" className="card-img" />
+                <img src="/Expert.png" alt="" className="card-img" />
               </div>
             </div>
 
@@ -458,7 +455,7 @@ const[token,setToken]=useState("");
               <span className="overlay"></span>
 
               <div className="card-image">
-                <img src="/Expert icon.png" alt="" className="card-img" />
+                <img src="/Expert.png" alt="" className="card-img" />
               </div>
             </div>
 
@@ -476,7 +473,7 @@ const[token,setToken]=useState("");
               <span className="overlay"></span>
 
               <div className="card-image">
-                <img src="/Expert icon.png" alt="" className="card-img" />
+                <img src="/Expert.png" alt="" className="card-img" />
               </div>
             </div>
 
@@ -494,7 +491,7 @@ const[token,setToken]=useState("");
               <span className="overlay"></span>
 
               <div className="card-image">
-                <img src="/Expert icon.png" alt="" className="card-img" />
+                <img src="/Expert.png" alt="" className="card-img" />
               </div>
             </div>
 
@@ -512,7 +509,7 @@ const[token,setToken]=useState("");
               <span className="overlay"></span>
 
               <div className="card-image">
-                <img src="/Expert icon.png" alt="" className="card-img" />
+                <img src="/Expert.png" alt="" className="card-img" />
               </div>
             </div>
 
