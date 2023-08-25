@@ -313,7 +313,7 @@ export default function Home() {
         </div>
       </Container>
       <div className="pb-24 md:px-24 flex flex-col gap-y-14 justify-center items-center">
-        <div className="text-3xl font-semi-bold">
+        <div className="text-xl md:text-3xl font-semi-bold">
           Why you <span className="text-orange">Choose us?</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-24 w-[100%] md:w-[80%]">
@@ -335,7 +335,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-center justify-center px-10 gap-y-6 text-center py-6 mb-12 md:mb-14">
-        <div className="text-3xl font-semi-bold">
+        <div className="text-xl md:text-3xl font-semi-bold">
           Explore Our Pet <span className="text-orange">Grooming Packages</span>
         </div>
         <div className="w-full md:w-[80%] grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-x-12 items-center justify-center">
@@ -383,7 +383,7 @@ export default function Home() {
             alt="happy pets"
             className="w-[50%] md:w-[50%] sm:w-[30%]"
           />
-          <div className="flex text-3xl font-semi-bold mt-5 mb-3 items-center justify-center text-center">
+          <div className="flex text-xl md:text-3xl font-semi-bold mt-5 mb-3 items-center justify-center text-center">
             Give your Pets pampering they deserve
           </div>
         </div>
@@ -401,7 +401,7 @@ export default function Home() {
         </div>
       </div>
       <Container className="px-10 slide-container">
-        <div className="text-3xl font-semi-bold flex justify-center items-center">
+        <div className="text-xl md:text-3xl font-semi-bold flex justify-center items-center">
           What our&nbsp;<span className="text-orange">Client Says</span>
         </div>
         <Swiper
@@ -534,7 +534,7 @@ export default function Home() {
         </div>
 
         <div className="md:w-[60%]">
-          <div className="text-3xl font-semi-bold mt-3 mb-4">
+          <div className="text-xl md:text-3xl font-semi-bold mt-3 mb-4">
             Frequently Asked
             <span className="text-orange"> Questions</span>
             <PetsIcon className="text-orange" />
