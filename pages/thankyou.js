@@ -80,7 +80,7 @@ const thankyou = () => {
       <div className="flex flex-col items-center p-6 rounded-xl bg-gradient-to-b from-white to-reviews h-full shadow-xl justify-between">
       <div className="flex flex-col md:flex-row  gap-y-14 md:justify-center md:items-center md:gap-x-24 md:px-24 md:py-10">
         <div className="w-[100%] md:w-[40%] ">
-          <div className="text-3xl md:text-3xl font-bold text-orange md:justify-start flex justify-center items-center pb-3">
+          <div className="text-2xl md:text-2xl font-bold text-orange md:justify-start flex justify-center items-center pb-3">
             ONE STOP SOLUTION
           </div>
           <div className="text-xl md:text-xl font-bold text-orange md:justify-start flex justify-center items-center pb-3">
