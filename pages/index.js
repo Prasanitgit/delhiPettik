@@ -235,8 +235,8 @@ export default function Home() {
       <Container className="pt-10 pb-10">
         <div className="pb-24 px-8 md:px-24 flex flex-col md:flex-row gap-y-14 gap-x-14 justify-center items-center">
           <div>
-            <div className="text-2xl font-medium mt-3 mb-2">
-              <span className="text-orange">Book</span> an appointment{" "}
+            <div className=" flex justify-center text-xl md:text-2xl font-medium mt-3 mb-2">
+              <span className="text-orange">Book&nbsp;</span> an appointment{" "}
               <PetsIcon className="text-orange" />
             </div>
             <Box
